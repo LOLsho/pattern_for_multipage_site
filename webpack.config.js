@@ -16,14 +16,24 @@ PATHS = {
 
 
 const common = {
-    entry: PATHS.src + '/js/index.js',
+    entry: {
+        'index': PATHS.src + '/js/index.js',
+        'about': PATHS.src + '/js/about.js',
+    },
     output: {
         path: PATHS.build,
-        filename: 'js/main.js'
+        filename: 'js/[name].js'
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: PATHS.src + '/index.pug'
+            filename: 'index.html',
+            chunks: ['index'],
+            template: PATHS.src + '/pug/pages/index.pug'
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'about.html',
+            chunks: ['about'],
+            template: PATHS.src + '/pug/pages/about.pug'
         })
     ]
 };
